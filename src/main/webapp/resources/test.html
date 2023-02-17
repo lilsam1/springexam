@@ -38,9 +38,27 @@
             Featured
           </div>
           <div class="card-body">
-            <h5 class="card-title">Special title treatment</h5>
-            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
+            <form action="/todo/register" method="post">
+              <div class="input-group mb-3">
+                <span class="input-group-text">Title</span>
+                <input type="text" name="title" class="form-control" placeholder="Title">
+              </div>
+              <div class="input-group mb-3">
+                <span class="input-group-text">DueDate</span>
+                <input type="date" name="dueDate" class="form-control" placeholder="Writer">
+              </div>
+              <div class="input-group mb-3">
+                <span class="input-group-text">Writer</span>
+                <input type="text" name="writer" class="form-control" placeholder="writer">
+              </div>
+
+              <div class="my-4">
+                <div class="float-end">
+                  <button type="submit" class="btn btn-primary">Register</button>
+                  <button type="reset" class="btn btn-secondary">Reset</button>
+                </div>
+              </div>
+            </form>
           </div>
         </div>
       </div>
