@@ -26,6 +26,15 @@
         </property>
     </bean>
 
+    <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+        <property name="formatters">
+            <set>
+                <bean class="com.example.springex.controller.fomatter.LocalDateFormatter" />
+                <bean class="com.example.springex.controller.fomatter.CheckboxFormatter" />
+            </set>
+        </property>
+    </bean>
+
     <mvc:annotation-driven conversion-service="conversionService" />
 
     <context:component-scan base-package="com.example.springex.controller" />

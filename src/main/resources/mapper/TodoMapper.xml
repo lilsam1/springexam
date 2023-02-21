@@ -8,10 +8,36 @@
     </select>
 
     <insert id="insert">
-        insert into tbl_todo (title, dueDate, writer) values (#{title}, #{dueDate}, #{writer})
+        insert into tbl_todo(title, dueDate, writer) values (#{title}, #{dueDate}, #{writer})
     </insert>
 
+    <!--    <select>태그의 경우 resultType을 지정하는것에 주의. resultType은 JDBC의 ResultSet의 한 행 row을 어떤 타입의 객체로 만들것인지를 지정.-->
     <select id="selectAll" resultType="com.example.springex.domain.TodoVO">
-        select * from tbl_todo order by tno desc;
+        select * from tbl_todo order by tno desc
+    </select>
+
+    <select id="selectOne" resultType="com.example.springex.domain.TodoVO">
+        select * from tbl_todo where tno = #{tno}
+    </select>
+
+    <delete id = "delete">
+        delete from tbl_todo where tno= #{tno}
+    </delete>
+
+    <update id="update">
+        update tbl_todo set title = #{title}, dueDate = #{dueDate}, finished= #{finished} where tno = ${tno}
+    </update>
+
+    <select id ="selectList" resultType="com.example.springex.domain.TodoVO">
+        select * from tbl_todo order by tno desc limit #{skip}, #{size}
+    </select>
+
+    <select id="getCount" resultType="int">
+        select count(tno) from tbl_todo
     </select>
 </mapper>
+
+        <!--
+        Mybatis를 이용하면 "?" 대신에 "#{title}"같이 파라미터를 처리.
+        "#{title}" 부분은 PreparedStatement로 변경되면서 "?"로 처리되고, 주어진 객체의 getTitle()을 호출한 결과를 적용
+        -->

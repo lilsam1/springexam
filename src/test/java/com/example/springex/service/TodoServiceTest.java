@@ -1,6 +1,8 @@
 package com.example.springex.service;
 
 import com.example.springex.domain.TodoVO;
+import com.example.springex.dto.PageRequestDTO;
+import com.example.springex.dto.PageResponseDTO;
 import com.example.springex.dto.TodoDTO;
 import com.sun.tools.javac.comp.Todo;
 import lombok.extern.log4j.Log4j2;
@@ -28,6 +30,14 @@ public class TodoServiceTest {
                 .writer("user1")
                 .build();
         todoService.register(todoDTO);
+    }
+
+    @Test
+    public void TestPaging() {
+        PageRequestDTO pageRequestDTO = PageRequestDTO.builder().page(1).size(10).build();
+        PageResponseDTO<TodoDTO> responseDTO = todoService.getList(pageRequestDTO);
+        log.info(responseDTO);
+        responseDTO.getDtoList().stream().forEach(todoDTO -> log.info(todoDTO));
     }
 
 }

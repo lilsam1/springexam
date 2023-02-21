@@ -33,10 +33,12 @@
     </tr>
     </thead>
     <tbody>
-    <c:forEach var="dto" items="${dtoList}">
+    <c:forEach var="dto" items="${responseDTO.dtoList}">
       <tr>
         <th scope="row">${dto.tno}</th>
-        <td>${dto.title}</td>
+        <td><a href="/todo/read?tno=${dto.tno}&${pageRequestDTO.link}" class="text-decoration-none">
+          <c:out value="${dto.title}"/>
+        </a></td>
         <td>${dto.writer}</td>
         <td>${dto.dueDate}</td>
         <td>${dto.finished}</td>
@@ -44,7 +46,41 @@
     </c:forEach>
     </tbody>
   </table>
+
+  <div class="float-end">
+    <ul class="pagination flex-wrap">
+      <c:if test="${responseDTO.prev}">
+        <li class="page-item">
+          <a class="page-link" data-num="${responseDTO.start - 1}">Previous</a>
+        </li>
+      </c:if>
+      <c:forEach var="num" begin="${responseDTO.start}" end="${responseDTO.end}">
+        <li class="page-item ${responseDTO.page == num ? "active" : ""}">
+          <a class="page-link" data-num="${num}">${num}</a></li>
+      </c:forEach>
+      <c:if test="${responseDTO.next}">
+        <li class="page-item">
+          <a class="page-link" data-num="${responseDTO.end + 1}">Next</a>
+        </li>
+      </c:if>
+    </ul>
+  </div>
 </div>
+
+<script>
+  document.querySelector('.pagination').addEventListener('click', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    const target = e.target;
+    if(target.tagName !== 'A') {
+      return;
+    }
+    const num = target.getAttribute('data-num');
+    self.location = `/todo/list?page=\${num}`;  // 벡틱을 이용해서 템플릿 처리
+
+  });
+</script>
 
 </body>
 </html>
