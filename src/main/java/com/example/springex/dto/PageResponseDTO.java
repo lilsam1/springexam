@@ -25,6 +25,7 @@ public class PageResponseDTO<E> {
 
     private List<E> dtoList;
 
+
     @Builder(builderMethodName = "withAll")
     public PageResponseDTO(PageRequestDTO pageRequestDTO, List<E> dtoList, int total) {
         this.page = pageRequestDTO.getPage();
@@ -50,6 +51,7 @@ public class PageResponseDTO<E> {
         this.prev = this.start > 1;
         // 다음 페이지는 마지막 페이지 end와 페이지당 개수 size를 곱한 값보다 total이 더 많은지 보고 판단
         this.next = total > this.end * this.size;
+
     }
 }
 

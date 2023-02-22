@@ -23,8 +23,8 @@
 <div class="card-body">
   <form action="/todo/modify" method="post">
 
-  <input type="hidden" name="page" value="${pageRequestDTO.page}">
-  <input type="hidden" name="size" value="${pageRequestDTO.size}">
+<%--  <input type="hidden" name="page" value="${pageRequestDTO.page}">--%>
+<%--  <input type="hidden" name="size" value="${pageRequestDTO.size}">--%>
 
   <div class="input-group mb-3">
     <span class="input-group-text">TNO</span>
@@ -63,12 +63,6 @@
   </form>
 </div>
 
-
-
-<form action="/todo/modify" method="post">
-  <input type="hidden" name="page" value="${pageRequestDTO.page}">
-  <input type="hidden" name="size" value="${pageRequestDTO.size}">
-</form>
   <script>
     const serverValidResult = {};
 
@@ -86,7 +80,7 @@
 
     // 삭제 처리
     document.querySelector(".btn-danger").addEventListener("click", function (e) {
-      frmView.action = "/todo/remove";
+      frmView.action = `/todo/remove?${pageRequestDTO.link}`;
       frmView.method = "post";
       frmView.submit();
     });
@@ -100,7 +94,7 @@
 
     // 수정 삭제 후 목록으로 이동하는 이벤트 처리
     document.querySelector(".btn-secondary").addEventListener("click", function (e) {
-      self.location = "/todo/list?${pageRequestDTO.link}";
+      self.location = `/todo/list?${pageRequestDTO.link}`;
     }, false);
   </script>
 
